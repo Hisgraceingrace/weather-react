@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.css";
+import "./Weather.css";
 import axios from "axios";
+import Footer from "./Footer";
 export default function Weather() {
   let [city, setCity] = useState("");
   let [loaded, setLoaded] = useState(false);
@@ -27,32 +28,56 @@ export default function Weather() {
   }
   let form = (
     <form onSubmit={handleSubmit}>
-      <input type="search" placeholder="Enter city" onChange={updateCity} />
-      <input type="submit" value="search" />
+      <div className="row">
+        <div className="col-9">
+          <input
+            type="search"
+            placeholder="Enter a city.."
+            className="form-control"
+            autoFocus="on"
+            onChange={updateCity}
+          />
+        </div>
+        <div className="col-3">
+          <input
+            type="submit"
+            value="search"
+            className="btn btn-primary w-100"
+          />
+        </div>
+      </div>
     </form>
   );
-  if (loaded) {
-    return (
+  // if (loaded) {
+  return (
+    <div className="container">
       <div className="Weather">
-        <div className="container">
-          {form}
-          {weather.description}
-          <div className="row">
-            <div className="col-6">
-              <img src={weather.icon} alt="weather icon" />
-              {weather.temperature}°C|°F
-            </div>
-            <div classNmae="col-6">
-              <ul>
-                <li>Humidity: {weather.humidity}%</li>
-                <li>Wind: {weather.wind}km/hr</li>
-              </ul>
-            </div>
+        {form}
+        <h1> Enugu </h1>
+        <ul>
+          <li>Wednesday 07:00</li>
+          <li>{weather.description}</li>
+        </ul>
+
+        <div className="row">
+          <div className="col-6">
+            <img src={weather.icon} alt="weather icon" />
+
+            <span className="temperature">{weather.temperature}</span>
+            <span className="unit">°F|°C</span>
+          </div>
+          <div className="col-6">
+            <ul>
+              <li>Humidity: {weather.humidity}%</li>
+              <li>Wind: {weather.wind}km/hr</li>
+            </ul>
           </div>
         </div>
       </div>
-    );
-  } else {
-    return form;
-  }
+      <Footer />
+    </div>
+  );
+  //} else {
+  //   return form;
+  // }
 }
