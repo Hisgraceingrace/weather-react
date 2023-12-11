@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
-
 export default function Weather() {
   let [city, setCity] = useState("");
   let [loaded, setLoaded] = useState(false);
@@ -34,16 +34,22 @@ export default function Weather() {
   if (loaded) {
     return (
       <div className="Weather">
-        {form}
-        <ul>
-          <li>Temperature: {weather.temperature}°C </li>
-          <li>Description: {weather.description}</li>
-          <li>Humidity: {weather.humidity}%</li>
-          <li>Wind: {weather.wind}km/hr</li>
-          <li>
-            <img src={weather.icon} alt="weather icon" />
-          </li>
-        </ul>
+        <div className="container">
+          {form}
+          {weather.description}
+          <div className="row">
+            <div className="col-6">
+              <img src={weather.icon} alt="weather icon" />
+              {weather.temperature}°C|°F
+            </div>
+            <div classNmae="col-6">
+              <ul>
+                <li>Humidity: {weather.humidity}%</li>
+                <li>Wind: {weather.wind}km/hr</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     );
   } else {
