@@ -17,6 +17,7 @@
 .Weather ul {
   margin: 0;
   padding: 0;
+  margin-bottom: 15px;
 }
 .Weather li {
   list-style: none;
@@ -26,20 +27,20 @@
 }
 .Weather img {
   margin-top: -30px;
-  margin-right: -10px;
+  margin-right: 10px;
 }
 .Weather .temperature {
   color: rgb(33, 33, 33);
-  font-size: 50px;
+  font-size: 48px;
   line-height: 64px;
-  margin: 60px 0;
+  margin-left: -15px;
 }
 .Weather .unit {
   position: relative;
-  top: -28px;
+  top: -25px;
 }
 
 .footer {
-  text-align: left;
+  text-align: center;
   margin-top: 5px auto;
 }

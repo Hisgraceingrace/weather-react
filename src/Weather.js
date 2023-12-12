@@ -3,6 +3,7 @@ import "./App.css";
 import "./Weather.css";
 import axios from "axios";
 import FormatedDate from "./FormatedDate";
+import WeatherTemperature from "./WeatherTemperature";
 import Footer from "./Footer";
 export default function Weather() {
   let [city, setCity] = useState("");
@@ -22,7 +23,7 @@ export default function Weather() {
   }
   function handleSubmit(event) {
     event.preventDefault();
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=743bee57fddbfaf52447193a87d5dd25`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=743bee57fddbfaf52447193a87d5dd25&units=metric`;
     axios.get(apiUrl).then(showWeather);
   }
   function updateCity(event) {
@@ -65,10 +66,8 @@ export default function Weather() {
 
           <div className="row">
             <div className="col-6">
-              <img src={weather.icon} alt="weather icon" />
-
-              <span className="temperature">{weather.temperature}</span>
-              <span className="unit">°F|°C</span>
+              <img src={weather.icon} alt="weather icon" />{" "}
+              <WeatherTemperature celsius={weather.temperature} />
             </div>
             <div className="col-6">
               <ul>
