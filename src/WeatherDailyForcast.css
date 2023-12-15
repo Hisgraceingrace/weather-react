@@ -1,0 +1,7 @@
+.WeatherDailyForcast {
+  text-align: center;
+}
+.WeatherDailyForcast-temperature-min {
+  opacity: 0.6;
+  margin-left: 5px;
+}

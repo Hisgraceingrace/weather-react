@@ -1,24 +1,26 @@
 import React, { useState } from "react";
-import "./App.css";
 import "./Weather.css";
 import axios from "axios";
 import FormatedDate from "./FormatedDate";
+import WeatherIcon from "./WeatherIcon";
 import WeatherTemperature from "./WeatherTemperature";
+import WeatherDailyForcast from "./WeatherDailyForcast";
 import Footer from "./Footer";
-export default function Weather() {
+
+export default function Weather(props) {
   let [city, setCity] = useState("");
-  let [loaded, setLoaded] = useState(false);
-  let [weather, setWeather] = useState({});
+
+  let [weather, setWeather] = useState({ loaded: false });
 
   function showWeather(response) {
-    setLoaded(true);
     setWeather({
+      loaded: true,
       temperature: Math.round(response.data.main.temp),
       wind: Math.round(response.data.wind.speed),
       humidity: response.data.main.humidity,
       date: new Date(response.data.dt * 1000),
       description: response.data.weather[0].description,
-      icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      icon: response.data.weather[0].icon,
     });
   }
   function handleSubmit(event) {
@@ -51,7 +53,7 @@ export default function Weather() {
       </div>
     </form>
   );
-  if (loaded) {
+  if (weather.loaded) {
     return (
       <div className="container">
         <div className="Weather">
@@ -66,7 +68,7 @@ export default function Weather() {
 
           <div className="row">
             <div className="col-6">
-              <img src={weather.icon} alt="weather icon" />{" "}
+              <WeatherIcon code={weather.icon} />
               <WeatherTemperature celsius={weather.temperature} />
             </div>
             <div className="col-6">
@@ -76,6 +78,7 @@ export default function Weather() {
               </ul>
             </div>
           </div>
+          <WeatherDailyForcast />
         </div>
         <Footer />
       </div>
@@ -85,7 +88,7 @@ export default function Weather() {
       <div className="container">
         <div className="Weather">
           {form}
-          <h1> Enugu </h1>
+          <h1> {props.defaultCity} </h1>
           <ul>
             <li>Wednesday 07:00</li>
             <li>Clear Sky</li>
